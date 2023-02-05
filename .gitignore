@@ -1,0 +1,4 @@
+.env
+node_modules/
+scrapedData.json
+mergedData.json
