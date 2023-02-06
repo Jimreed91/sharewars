@@ -24,6 +24,19 @@ app.get('/solutions', (request, response) => {
   .catch(error => next(error))
 })
 
+//Pull solution by :id
+app.get('/solutions/:id', (request, response) => {
+  Solution.findById(request.params.id)
+  .then(solution => {
+    if(solution) {
+      response.json(solution)
+    } else {
+      response.status(404).end()
+    }
+  })
+  .catch(error => next(error))
+})
+
 //Error/bad endpoint handling
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
