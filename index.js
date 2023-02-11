@@ -20,7 +20,8 @@ app.listen(PORT, () => {
 const Solution = require('./models/solution')
 //Pull solutions from mongoDB
 app.get('/solutions', (request, response) => {
-  Solution.find({}).then(solutions => {
+  Solution.find({}).sort({dateCompleted: -1})
+  .then(solutions => {
     response.json(solutions)
   })
   .catch(error => next(error))
