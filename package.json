@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "No tests available"
+    "start": "node node_modules/puppeteer/install.js && node index.js"
   },
   "author": "James Reed",
   "license": "ISC",

@@ -17,7 +17,7 @@ module.exports = {
   scrape: async function (target = 50) {
     console.log('Launching Puppeteer');
     const browser = await puppeteer.launch({
-      headless: false
+      headless: true
     });
 
     const page = await browser.newPage()
