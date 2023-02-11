@@ -41,14 +41,24 @@ app.get('/solutions/:id', (request, response) => {
 
 app.post('/solutions/update', (request, response) => {
 
-  (async () => {
-    await codewars
-    await codewars.scrape()
-    console.log("scraped")
-    await codewars.saveAll()
-    console.log("done"),
-    response.json(200)
-  })();
+  Solution.deleteMany({}).then(
+  codewars.scrape()
+    .then((d) => {
+      codewars.merge(d)
+    .then(d => Solution.collection.insertMany(d))
+    .then((docs) => {
+      console.log("data insterted")
+      response.json(docs)
+    })
+    .catch((e) => console.log(e))
+}))
+    // .then
+    // // codewars.saveAll()
+    // Solution.collection.insertMany(data)
+    // .then(() => console.log('updated succ 🎉'))
+    // .catch(e => console.log(e))
+
+
 })
 
 

@@ -1,14 +1,19 @@
-const fs = require('fs');
 require('dotenv').config()
+const axios = require('axios');
 const puppeteer = require('puppeteer');
 const BASE_URL = 'https://www.codewars.com/'
+const API_BASE_URL = 'https://www.codewars.com/api/v1/code-challenges/'
 const username = process.env.USR
 const email = process.env.EMAIL
 const password = process.env.PASSWORD
 
+//uses scraped id to retrieve the code challenge information from codewars api
+const getData = (id) => axios.get(`${API_BASE_URL}${id}`)
+
 // This module handles scraping codewars for new data, combining it with api data
 // and updating the db after merging the two
 module.exports = {
+  //Scraping function
   scrape: async function (target = 50) {
     console.log('Launching Puppeteer');
     const browser = await puppeteer.launch({
@@ -63,38 +68,31 @@ module.exports = {
 
   console.log(`Successfully scraped ${solutions.length} solutions.`);
   console.log('Closing Puppeteer instance.');
-
-  console.log("Saving data")
-    const solutionJson = JSON.stringify(solutions, null, 4)
-  fs.writeFileSync('./scrapedData.json', solutionJson )
   await browser.close();
+  return solutions
   },
 
-  saveAll: async function() {
-    const Solution = await require('../models/solution')
-    const data = await require('./mergedData.json')
-      console.log('clearing db')
-    await  Solution.deleteMany({})
-      console.log('cleared successfully')
-    await  data.forEach(d => {
-        const solution = new Solution({
-        id: d.id,
-        name: d.name,
-        description: d.description,
-        rankColor: d.rank.color,
-        rankName: d.rank.name,
-        rank: d.rank.id,
-        problemId: d.problemId,
-        languages: d.languages,
-        codeSolutions: d.codeSolutions,
-        dateTime: d.dateTime,
-        timeAgo: d.timeAgo
-        })
+  merge: function(solutions){
+    console.log("Retrieving data from codewars")
 
-        solution.save().then(savedSolution => {
-          console.log(savedSolution.name, 'sent...')
-        })
-      })
-      console.log("saved successfully")
-  }
+    const apiData = axios.all(solutions.map(solution => getData(solution.problemId) ))
+      .then(responses => responses.map(response => response.data))
+      .then(responses => responses.map(response => (
+        {
+          id: response.id,
+          name: response.name,
+          description: response.description,
+          rank: response.rank
+        }
+        )
+        ))
+        .then(response => mapData(response))
+    function mapData(response){
+       return response.map((r) => {
+          return Object.assign({}, r, solutions.find(s => s.problemId === r.id))
+          })
+    }
+    return apiData
+      }
+
 }

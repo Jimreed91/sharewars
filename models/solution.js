@@ -12,11 +12,17 @@ mongoose.connect(url)
     console.log('error connecting to MongoDB', error.message)
   })
 
-const solutionSchema = new mongoose.Schema({
+  const RankSchema = new mongoose.Schema({
+    id: Number,
+    name: String,
+    color: String
+  })
+
+const SolutionSchema = new mongoose.Schema({
   id: String,
   name: String,
   description: String,
-  rank: Number,
+  rank: {type: RankSchema},
   rankColor: String,
   rankName: String,
   problemId: String,
@@ -27,7 +33,7 @@ const solutionSchema = new mongoose.Schema({
 
 }, {versionKey: false })
 
-solutionSchema.set('toJSON', {
+SolutionSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -35,6 +41,6 @@ solutionSchema.set('toJSON', {
   }
 })
 
-const Solution = mongoose.model('Solution', solutionSchema)
+const Solution = mongoose.model('Solution', SolutionSchema)
 
-module.exports = mongoose.model('Solution', solutionSchema)
+module.exports = mongoose.model('Solution', SolutionSchema)
