@@ -45,8 +45,8 @@ module.exports = {
             const problemName = solution.querySelector('.item-title a').textContent.toLowerCase().replace(/[^\w ]/gi, '').trim().replace(/ +/g, '_');
             const languages = [...solution.querySelectorAll('code')].map(code => code.getAttribute('data-language'));
             const codeSolutions = [...solution.querySelectorAll('code')].map(code => code.textContent);
-            const dateTime = Date(solution.querySelector('time-ago').getAttribute('datetime'))
-            const timeAgo = solution.querySelector('time-ago').innerText
+            const dateTime = solution.querySelector('time-ago').getAttribute('datetime');
+            const timeAgo = solution.querySelector('time-ago').innerText;
             return {
                 problemId,
                 problemName,

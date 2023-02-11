@@ -28,7 +28,7 @@ const SolutionSchema = new mongoose.Schema({
   problemId: String,
   languages: Array,
   codeSolutions: Array,
-  dateTime: Date,
+  dateTime: String,
   timeAgo: String
 
 }, {versionKey: false })
