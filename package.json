@@ -4,8 +4,9 @@
   "description": "Scraping codewars user solutions",
   "main": "index.js",
   "scripts": {
-    "test": "No tests available"
-    "start": "node node_modules/puppeteer/install.js && node index.js"
+    "test": "No tests available",
+    "build":"npm install && node node_modules/puppeteer/install.js",
+    "start": "node index.js"
   },
   "author": "James Reed",
   "license": "ISC",
