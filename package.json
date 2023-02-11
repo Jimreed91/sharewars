@@ -4,8 +4,7 @@
   "description": "Scraping codewars user solutions",
   "main": "index.js",
   "scripts": {
-    "test": "No tests available",
-    "prepare": "node scraper.js && node apimerger.js"
+    "test": "No tests available"
   },
   "author": "James Reed",
   "license": "ISC",
