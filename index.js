@@ -6,12 +6,14 @@ const { response } = require('express')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+
 morgan.token('type', function (req, res) { return JSON.stringify(req.body) })
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :type'))
-app.use(cors('*'))
+
 // Importing a custom module to deal with scraping and bulk updating
 const codewars = require('./codewars/scraper');
 
