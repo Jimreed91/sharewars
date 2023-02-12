@@ -49,7 +49,7 @@ app.get('/solutions/:id', (request, response) => {
 
 app.post('/solutions/update', (request, response) => {
   if(NODE_ENV === production){
-    response.status(401).send({ error: 'Remote update not available' })
+    response.json({ error: 'Remote update not available' })
   }
   Solution.deleteMany({}).then(
     codewars.scrape()
