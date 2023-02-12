@@ -48,7 +48,7 @@ app.get('/solutions/:id', (request, response) => {
 })
 
 app.post('/solutions/update', (request, response) => {
-  if(NODE_ENV === production){
+  if(NODE_ENV === 'production'){
     response.json({ error: 'Remote update not available' })
   }
   Solution.deleteMany({}).then(
