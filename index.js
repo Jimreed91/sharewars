@@ -20,6 +20,10 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
 
+app.get('/health', (request, response) => {
+  response.status(200).end()
+})
+
 const Solution = require('./models/solution')
 //Pull solutions from mongoDB
 app.get('/solutions', (request, response) => {
