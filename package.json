@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "No tests available",
-    "build": "npm install && node node_modules/puppeteer/install.js",
+    "build": "npm install",
     "start": "node index.js"
   },
   "author": "James Reed",

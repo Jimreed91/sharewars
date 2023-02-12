@@ -1,4 +1,5 @@
-if (process.env.NODE_ENV !== 'production') {
+const NODE_ENV = process.env.NODE_ENV
+if ( NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 const { response } = require('express')
@@ -43,17 +44,19 @@ app.get('/solutions/:id', (request, response) => {
 })
 
 app.post('/solutions/update', (request, response) => {
-
+  if(NODE_ENV === production){
+    response.status(401).send({ error: 'Remote update not available' })
+  }
   Solution.deleteMany({}).then(
-  codewars.scrape()
-    .then((d) => {
-      codewars.merge(d)
-    .then(d => Solution.collection.insertMany(d))
-    .then((docs) => {
-      console.log("data insterted")
-      response.json(docs)
-    })
-    .catch((e) => console.log(e))
+    codewars.scrape()
+      .then((d) => {
+        codewars.merge(d)
+      .then(d => Solution.collection.insertMany(d))
+      .then((docs) => {
+        console.log("data insterted")
+        response.json(docs)
+      })
+      .catch((e) => console.log(e))
 }))
     // .then
     // // codewars.saveAll()
