@@ -48,7 +48,8 @@ app.get('/solutions/:id', (request, response) => {
   })
   .catch(error => response.json(error))
 })
-
+// Set up for allowing remote update via codewars webook
+// not enabled for production
 app.post('/solutions/update', (request, response) => {
   if(NODE_ENV === 'production'){
     response.json({ error: 'Remote update not available' })
