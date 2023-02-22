@@ -17,10 +17,12 @@ James - jamesreed3050@gmail.com
 
 Project Link: [cw.jimreed91.me](https://cw.jimreed91.me)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 ## Acknowledgments
 
 * [Codewars](https://www.codewars.com)
-* I couldnt get it working but some of the scraper code is inspired by [codewars-solutions-scraper](https://www.npmjs.com/package/codewars-solutions-scraper?activeTab=readme)
+* I couldnt get it working so I rebuilt it for my specific use-case but some of the scraper code is inspired by [codewars-solutions-scraper](https://www.npmjs.com/package/codewars-solutions-scraper?activeTab=readme)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
