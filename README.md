@@ -10,14 +10,6 @@
 ## About The Project
 The backend for my codewars solutions app, built with Node, Express, MongoDB, Mongoose and Puppeteer. More detailed README is on the way
 
-### Built With
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-<!-- CONTRIBUTING -->
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 ## Contact
