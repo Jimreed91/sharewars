@@ -6,7 +6,9 @@ const main = () => {
     codewars.scrape()
       .then((d) => {
         codewars.merge(d)
-      .then(d => Solution.collection.insertMany(d))
+      .then(d => {
+        console.log("Updating database...")
+        Solution.collection.insertMany(d)})
       .then((docs) => {
         console.log("Update successful!")
       })

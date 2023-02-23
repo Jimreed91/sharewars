@@ -17,7 +17,7 @@ module.exports = {
   scrape: async function (target = 50) {
     console.log('Launching Puppeteer');
     const browser = await puppeteer.launch({
-      headless: true
+      headless: false
     });
 
     const page = await browser.newPage()
@@ -34,7 +34,7 @@ module.exports = {
     console.log('Logged in')
 
     await page.goto(`${BASE_URL}/users/${username}/completed_solutions`, {waitUntil: 'domcontentloaded'})
-    console.log('They see me scrolling, I assure you Im scraping')
+    console.log('Scrolling and scraping...')
 
     let solutions = []
 
