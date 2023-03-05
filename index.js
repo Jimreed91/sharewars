@@ -1,7 +1,5 @@
 const NODE_ENV = process.env.NODE_ENV
-if ( NODE_ENV !== 'production') {
   require('dotenv').config();
-}
 const { response } = require('express')
 const express = require('express')
 const morgan = require('morgan')

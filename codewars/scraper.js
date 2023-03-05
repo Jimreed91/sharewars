@@ -96,6 +96,6 @@ module.exports = {
     }
     return apiData
       }
-      process.exit()
+
 
 }

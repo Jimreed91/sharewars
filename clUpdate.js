@@ -18,4 +18,3 @@ const main = () => {
 }
 console.log("Updating...")
 main()
-process.exit()
