@@ -50,9 +50,11 @@ app.get('/solutions/:id', (request, response) => {
 app.post('/solutions/update', (request, response) => {
   if(request.body.action === 'honor_changed'
   && request.get('X-Webhook-Secret') === process.env.CW_SECRET) {
+    console.log('Codewars webhook received')
     const cwUpdate = require('./cwUpdate');
     return response.status(200).end()
 }
+  console.log('Bad request')
   response.status(400).end()
 })
 
