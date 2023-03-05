@@ -4,6 +4,8 @@ const { response } = require('express')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+// Importing a custom module to deal with scraping and bulk updating
+const codewars = require('./scraper/codewars');
 
 morgan.token('type', function (req, res) { return JSON.stringify(req.body) })
 
@@ -11,9 +13,6 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :type'))
-
-// Importing a custom module to deal with scraping and bulk updating
-const codewars = require('./codewars/scraper');
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
@@ -49,28 +48,14 @@ app.get('/solutions/:id', (request, response) => {
 // Set up for allowing remote update via codewars webook
 // not enabled for production
 app.post('/solutions/update', (request, response) => {
-  if(NODE_ENV === 'production'){
-    response.json({ error: 'Remote update not available' })
-  }
-  Solution.deleteMany({}).then(
-    codewars.scrape()
-      .then((d) => {
-        codewars.merge(d)
-      .then(d => Solution.collection.insertMany(d))
-      .then((docs) => {
-        console.log("data insterted")
-        response.json(docs)
-      })
-      .catch((e) => console.log(e))
-}))
-    // .then
-    // // codewars.saveAll()
-    // Solution.collection.insertMany(data)
-    // .then(() => console.log('updated succ 🎉'))
-    // .catch(e => console.log(e))
-
-
+  if(request.body.action === 'honor_changed'
+  && request.get('X-Webhook-Secret') === process.env.CW_SECRET) {
+    const cwUpdate = require('./cwUpdate');
+    return response.status(200).end()
+}
+  response.status(400).end()
 })
+
 
 
 //Error/bad endpoint handling

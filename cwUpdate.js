@@ -1,5 +1,5 @@
 const Solution = require('./models/solution');
-const codewars = require('./codewars/scraper');
+const codewars = require('./scraper/codewars');
 
 const main = () => {
   Solution.deleteMany({}).then(
