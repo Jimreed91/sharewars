@@ -17,7 +17,9 @@ module.exports = {
   scrape: async function (target = 50) {
     console.log('Launching Puppeteer');
     const browser = await puppeteer.launch({
-      headless: false
+      executablePath: '/usr/bin/google-chrome',
+      args: ['--no-sandbox'],
+      headless: true
     });
 
     const page = await browser.newPage()
@@ -94,5 +96,6 @@ module.exports = {
     }
     return apiData
       }
+      process.exit()
 
 }
