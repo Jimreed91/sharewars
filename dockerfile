@@ -13,5 +13,6 @@ RUN apt-get update && apt-get install gnupg wget -y && \
 WORKDIR /
 COPY . .
 RUN npm install
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
 EXPOSE 3002
 CMD ["node", "index.js"]
