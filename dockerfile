@@ -1,3 +1,4 @@
+# syntax = docker/dockerfile:1.2
 FROM node:18-slim
 # We don't need the standalone Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
@@ -13,6 +14,6 @@ RUN apt-get update && apt-get install gnupg wget -y && \
 WORKDIR /
 COPY . .
 RUN npm install
-RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env
 EXPOSE 3002
 CMD ["node", "index.js"]
