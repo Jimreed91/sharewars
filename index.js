@@ -5,7 +5,6 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 // Importing a custom module to deal with scraping and bulk updating
-const codewars = require('./scraper/codewars');
 
 morgan.token('type', function (req, res) { return JSON.stringify(req.body) })
 
