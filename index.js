@@ -49,7 +49,7 @@ app.get('/solutions/:id', (request, response) => {
 // Set up for allowing remote update via codewars webook
 // not enabled for production
 app.post('/solutions/update', (request, response) => {
-  if(request.body.action === 'honor_changed'
+  if(request.body.action === 'updated'
   && request.get('X-Webhook-Secret') === process.env.CW_SECRET) {
     console.log('Valid CodeWars webhook received')
     return response.status(200).send(cwUpdate.update())
