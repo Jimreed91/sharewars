@@ -13,8 +13,12 @@ module.exports = {
         .then((docs) => {
           console.log("Update successful!")
         })
-        .catch((e) => console.log(e))
+        .catch((e) => {
+          console.log(e)
+          return {status: 'error', error: e}
+        })
         })
     )
+    return {status: 'success'}
   }
 }

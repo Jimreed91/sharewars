@@ -10,6 +10,10 @@
 ## About The Project
 The backend for my codewars solutions app, built with Node, Express, MongoDB, Mongoose and Puppeteer. More detailed README is on the way
 
+## Docker commands
+``` docker build -t sharewars-docker .
+docker run -dp 3002:3002 --env-file .env sharewars-docker
+```
 
 <!-- CONTACT -->
 ## Contact
