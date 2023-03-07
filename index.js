@@ -4,7 +4,9 @@ const { response } = require('express')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+
 // Importing a custom module to deal with scraping and bulk updating
+const cwUpdate = require('./cwUpdate');
 
 morgan.token('type', function (req, res) { return JSON.stringify(req.body) })
 
@@ -49,8 +51,8 @@ app.get('/solutions/:id', (request, response) => {
 app.post('/solutions/update', (request, response) => {
   if(request.body.action === 'honor_changed'
   && request.get('X-Webhook-Secret') === process.env.CW_SECRET) {
-    console.log('Codewars webhook received')
-    const cwUpdate = require('./cwUpdate');
+    console.log('Valid CodeWars webhook received')
+    cwUpdate.update()
     return response.status(200).end()
 }
   console.log('Bad request')
