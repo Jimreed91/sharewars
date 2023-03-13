@@ -14,7 +14,7 @@ const getData = (id) => axios.get(`${API_BASE_URL}${id}`)
 // and updating the db after merging the two
 module.exports = {
   //Scraping function
-  scrape: async function (target = 50) {
+  scrape: async function (target = 80) {
     console.log('Launching Puppeteer');
     const browser = await puppeteer.launch({
       executablePath: '/usr/bin/google-chrome',
